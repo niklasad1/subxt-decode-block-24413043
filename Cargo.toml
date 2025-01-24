@@ -1,0 +1,10 @@
+[package]
+name = "subxt-decode-block-24413043"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+subxt = { version = "=0.38.0", features = ["reconnecting-rpc-client"] }
+tokio = { version = "1.43.0", features = ["rt-multi-thread", "macros", "time"] }
+hex-literal = "*"
+tracing-subscriber = { version = "*", features = ["env-filter"] }
