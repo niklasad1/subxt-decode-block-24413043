@@ -11,13 +11,13 @@ mod src_chain {}
 
 #[tokio::main]
 async fn main() {
-    let filter = tracing_subscriber::EnvFilter::try_from_default_env().unwrap();
+    // let filter = tracing_subscriber::EnvFilter::try_from_default_env().unwrap();
 
-    tracing_subscriber::FmtSubscriber::builder()
-        .with_env_filter(filter)
-        .finish()
-        .try_init()
-        .unwrap();
+    // tracing_subscriber::FmtSubscriber::builder()
+    //     .with_env_filter(filter)
+    //     .finish()
+    //     .try_init()
+    //     .unwrap();
 
     let rpc = RpcClient::from_url("wss://polkadot-rpc.publicnode.com")
         .await
@@ -44,6 +44,8 @@ async fn main() {
     let xts = block.extrinsics().await.unwrap();
 
     for xt in xts.iter() {
+        let is_root_ext = xt.as_root_extrinsic::<src_chain::Call>().is_ok();
+        println!("is root extrinsic: {}", is_root_ext);
         println!(
             "{}::{} => xt_hash={:?}",
             xt.pallet_name().unwrap(),
